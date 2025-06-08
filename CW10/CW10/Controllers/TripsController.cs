@@ -34,4 +34,4 @@ public class TripsController(ITripsService tripsService) : ControllerBase
             return BadRequest(e.Message);
         }
     }
-}
+} 
