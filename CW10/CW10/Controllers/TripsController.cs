@@ -1,6 +1,7 @@
 ﻿using CW10.DTOs;
 using CW10.Services;
 using Microsoft.AspNetCore.Mvc;
+using CW10.Exceptions;
 
 namespace CW10.Controllers;
 
@@ -16,7 +17,11 @@ public class TripsController(ITripsService tripsService) : ControllerBase
         {
             return Ok(await tripsService.GetTrips(page, pageSize));
         }
-        catch (Exception e)
+        catch (NotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (TripsException e)
         {
             return BadRequest(e.Message);
         }
@@ -29,7 +34,11 @@ public class TripsController(ITripsService tripsService) : ControllerBase
         {
             return Ok(await tripsService.AddClientToTrip(idTrip, client));
         }
-        catch (Exception e)
+        catch (NotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (TripsException e)
         {
             return BadRequest(e.Message);
         }

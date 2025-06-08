@@ -20,6 +20,10 @@ public class ClientsController(IClientsService clientsService) : ControllerBase
         {
             return BadRequest(e.Message);
         }
+        catch (NotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
     }
     
 } 
